@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "name": "unit-converter",
+  "description": "Переводит числа между единицами измерения: длина, масса, температура, объём, скорость и другие. Больше ничего не делает.",
+  "version": "0.1.0",
+  "created_at": "2026-09-03T21:36:46+00:00",
+  "generator": "agent-builder-mcp",
+  "standard": {
+    "framework": "langchain",
+    "api": "create_agent",
+    "docs": "https://docs.langchain.com/oss/python/langchain/agents"
+  },
+  "model": {
+    "id": "anthropic:claude-sonnet-5",
+    "provider": "anthropic",
+    "name": "claude-sonnet-5",
+    "package": "langchain-anthropic"
+  },
+  "runtime": {
+    "python": "3.13",
+    "entrypoint": "agent:build_agent",
+    "cli": "main.py",
+    "venv": ".venv"
+  },
+  "secrets": [
+    "ANTHROPIC_API_KEY"
+  ],
+  "memory": {
+    "session": false,
+    "long_term": false,
+    "note": "Агент без памяти по требованию: чекпоинтер не подключается."
+  },
+  "deploy": {
+    "status": "deployed",
+    "target": {
+      "host": "164.92.199.205",
+      "directory": "/opt/agents/unit-converter",
+      "container": "agent-unit-converter"
+    },
+    "policies": {
+      "network": "unrestricted",
+      "human_in_the_loop": [],
+      "max_cost_usd_per_run": null
+    },
+    "deployed_at": "2026-09-03T21:47:29+00:00",
+    "memory_database": "agent_unit-converter"
+  }
+}
