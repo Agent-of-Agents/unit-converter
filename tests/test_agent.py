@@ -59,6 +59,13 @@ def call(tool, **kwargs) -> str:
         (1.0, "квт·ч", "дж", "3600000"),
         (1.0, "гб", "мб", "1000"),
         (180.0, "градус", "рад", "3.14159"),
+        (1.0, "кгц", "гц", "1000"),
+        (1.0, "МГц", "кГц", "1000"),
+        (2.4, "ГГц", "МГц", "2400"),
+        (60.0, "об/мин", "гц", "1"),
+        (3000.0, "оборотов в минуту", "Гц", "50"),
+        (1.0, "hz", "rpm", "60"),
+        (1.0, "gigahertz", "hertz", "1000000000"),
     ],
 )
 def test_known_conversions(value: float, src: str, dst: str, expected: str) -> None:
@@ -85,3 +92,27 @@ def test_list_units_lists_categories_and_units() -> None:
     assert "длина" in call(list_units, category="")
     assert "kg" in call(list_units, category="масса")
     assert "c" in call(list_units, category="температура")
+
+
+def test_frequency_category_is_listed() -> None:
+    assert "частота" in call(list_units, category="")
+    units = call(list_units, category="частота")
+    for unit in ("hz", "khz", "mhz", "ghz", "rpm"):
+        assert unit in units, units
+
+
+def test_frequency_is_separate_from_other_categories() -> None:
+    """Частота не должна переводиться во время или в угол."""
+    assert "не переводятся" in call(
+        convert_units, value=1.0, from_unit="гц", to_unit="с"
+    )
+    assert "не переводятся" in call(
+        convert_units, value=1.0, from_unit="об/мин", to_unit="градус"
+    )
+
+
+def test_bare_revolution_still_means_angle() -> None:
+    """Слово «оборот» без минуты осталось за категорией «угол»."""
+    result = call(convert_units, value=1.0, from_unit="оборот", to_unit="градус")
+    assert "360" in result, result
+    assert "угол" in result, result

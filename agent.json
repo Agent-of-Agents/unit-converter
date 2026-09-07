@@ -44,5 +44,12 @@
     },
     "deployed_at": "2026-09-03T21:47:29+00:00",
     "memory_database": "agent_unit-converter"
+  },
+  "repository": {
+    "org": "Agent-of-Agents",
+    "name": "unit-converter",
+    "url": "https://github.com/Agent-of-Agents/unit-converter",
+    "branch": "main",
+    "published_at": "2026-09-07T21:13:18+00:00"
   }
 }
