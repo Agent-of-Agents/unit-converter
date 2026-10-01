@@ -56,7 +56,7 @@ def build_agent(config: AgentConfig | None = None):
     """
     cfg = config or AgentConfig.from_env()
     return create_agent(
-        model=cfg.model,
+        model=cfg.chat_model(),
         tools=TOOLS,
         system_prompt=SYSTEM_PROMPT,
         middleware=build_middleware(cfg),

@@ -11,7 +11,7 @@ from tools.convert import convert_units, list_units
 
 
 def test_config_defaults_to_blueprint_model() -> None:
-    assert AgentConfig().model == "anthropic:claude-sonnet-5"
+    assert AgentConfig().model == "openai:gpt-5.5"
 
 
 def test_tools_are_registered() -> None:
@@ -26,7 +26,7 @@ def test_system_prompt_is_not_empty() -> None:
 
 
 def test_agent_builds() -> None:
-    built = agent.build_agent(AgentConfig())
+    built = agent.build_agent(AgentConfig(llm_api_key="test-key"))  # без ключа клиент OpenAI не создаётся
     assert built is not None
 
 

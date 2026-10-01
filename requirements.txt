@@ -1,5 +1,5 @@
 langchain>=1.0
-langchain-anthropic
+langchain-openai
 python-dotenv>=1.0
 
 # Точка входа в контейнере. Памяти нет, поэтому пакетов чекпоинтера тут нет.
